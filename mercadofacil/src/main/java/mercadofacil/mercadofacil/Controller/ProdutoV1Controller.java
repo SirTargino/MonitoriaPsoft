@@ -27,11 +27,26 @@ public class ProdutoV1Controller {
                 .body(produtoCrudService.criarProduto(produtoPostPutDto));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<ProdutoResponseDto> atualizarProduto(@PathVariable Long id, @RequestBody @Valid ProdutoPostPutDto produtoPostPutDto) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(produtoCrudService.atualizarProduto(id, produtoPostPutDto));
+    }
+
     @GetMapping("")
     public ResponseEntity<List<ProdutoResponseDto>> buscarTodosProdutos() {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(produtoCrudService.buscarTodosProdutos());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> removerProduto(@PathVariable Long id) {
+        produtoCrudService.removerProduto(id);
+        return ResponseEntity
+                .noContent()
+                .build();
     }
 
 

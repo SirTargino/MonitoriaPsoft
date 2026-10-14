@@ -26,6 +26,22 @@ public class ProdutoCrudPadraoService implements ProdutoCrudService {
     }
 
     @Override
+    public ProdutoResponseDto atualizarProduto(Long id, ProdutoPostPutDto produtoPostPutDto) {
+        Produto produto = produtoRepository.findById(id)
+        .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+        modelMapper.map(produtoPostPutDto, produto);
+        return modelMapper.map(produtoRepository.save(produto), ProdutoResponseDto.class);
+    }
+
+    @Override
+    public void removerProduto(Long id) {
+        if(produtoRepository.findById(id).isEmpty()) {
+            throw new RuntimeException("Produto não encontrado");
+        }
+        produtoRepository.deleteById(id);
+    }
+
+    @Override
     public List<ProdutoResponseDto> buscarTodosProdutos() {
         return produtoRepository.findAll()
                 .stream()

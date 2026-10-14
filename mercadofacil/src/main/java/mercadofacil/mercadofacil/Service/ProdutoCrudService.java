@@ -8,5 +8,9 @@ import java.util.List;
 public interface ProdutoCrudService {
     ProdutoResponseDto criarProduto(ProdutoPostPutDto produtoPostPutDto);
 
+    ProdutoResponseDto atualizarProduto(Long id, ProdutoPostPutDto produtoPostPutDto);
+
+    void removerProduto(Long id);
+
     List<ProdutoResponseDto> buscarTodosProdutos();
 }
