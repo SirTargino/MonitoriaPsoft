@@ -35,10 +35,14 @@ public class ProdutoV1Controller {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<ProdutoResponseDto>> buscarTodosProdutos() {
+    public ResponseEntity<List<ProdutoResponseDto>> buscarProdutos(
+            @RequestParam(required = false) String nomeProduto) {
+        List<ProdutoResponseDto> produtos = (nomeProduto == null || nomeProduto.isBlank())
+                ? produtoCrudService.buscarTodosProdutos()
+                : produtoCrudService.buscarProdutoPorNome(nomeProduto);
         return ResponseEntity
                 .status(HttpStatus.OK)
-                .body(produtoCrudService.buscarTodosProdutos());
+                .body(produtos);
     }
 
     @DeleteMapping("/{id}")

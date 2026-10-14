@@ -13,4 +13,6 @@ public interface ProdutoCrudService {
     void removerProduto(Long id);
 
     List<ProdutoResponseDto> buscarTodosProdutos();
+
+    List<ProdutoResponseDto> buscarProdutoPorNome(String nomeProduto);
 }

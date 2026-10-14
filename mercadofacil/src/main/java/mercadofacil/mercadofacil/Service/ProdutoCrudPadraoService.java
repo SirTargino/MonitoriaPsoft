@@ -48,4 +48,12 @@ public class ProdutoCrudPadraoService implements ProdutoCrudService {
                 .map(produto -> modelMapper.map(produto, ProdutoResponseDto.class))
                 .toList();
     }
+
+    @Override
+    public List<ProdutoResponseDto> buscarProdutoPorNome(String nomeProduto) {
+        return produtoRepository.findByNomeProdutoContainingIgnoreCaseOrderByNomeProdutoAsc(nomeProduto)
+                .stream()
+                .map(produto -> modelMapper.map(produto, ProdutoResponseDto.class))
+                .toList();
+    }
 }
